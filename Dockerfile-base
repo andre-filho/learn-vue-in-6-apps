@@ -1,0 +1,11 @@
+FROM node:9.5
+
+WORKDIR /asdf
+
+ADD . /asdf
+
+RUN apt update -qq && \
+    npm install -g vue-cli && \
+    npm install
+
+CMD [ "npm start" ]

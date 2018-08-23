@@ -13,9 +13,8 @@
     <!-- Notebook app -->
     <div id="notebook">
       <!-- Main pane -->
-      <section class="main">
-        <textarea v-model="content" cols="30" rows="10"></textarea>  
-      </section>
+      <textarea v-model="content" cols="30" rows="10"></textarea>  
+      <aside class="preview" v-html="notePreview"></aside>  
     </div>
     <!-- Some JavaScript -->
     <script src="script.js"></script>
