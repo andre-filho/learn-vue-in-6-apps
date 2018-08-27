@@ -12,6 +12,19 @@
     <script src="https://unpkg.com/marked"></script>
     <!-- Notebook app -->
     <div id="notebook">
+      <aside class="side-bar">
+        <div class="toolbar">
+          <button 
+            @click="addNote">
+            Add note
+          </button>
+          <div class="notes">
+            <div v-for="note in notes" :key="note.id">
+              {{ note.title }}
+            </div>
+          </div>
+        </div>
+      </aside>
       <!-- Main pane -->
       <textarea v-model="content" cols="30" rows="10"></textarea>  
       <aside class="preview" v-html="notePreview"></aside>  

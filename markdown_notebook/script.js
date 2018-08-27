@@ -1,8 +1,9 @@
 new Vue({
     el: '#notebook',
-    data() {
+    data () {
         return {
-            content: 'this is a note',
+            content: localStorage.getItem('content') || 'you can write in **markdown**',
+            notes: []
         }
     },
     computed: {
@@ -24,14 +25,18 @@ new Vue({
         reportOperation (opName) {
             console.log('the', opName, 'opertation was completed')
         },
-        catchNoteIfExists () {
-            if (localStorage.getItem('content')) {
-                this.content = localStorage.getItem('content')
+        addNote () {
+            const time = Date.now()
+            // default new note
+            const note = {
+                id: String(time),
+                title: 'New note ' + (this.notes.length + 1),
+                content: '**Hi!** This notebook is using [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for formatting.',
+                created: time,
+                favorite: false,
             }
+            this.notes.push(note)
         },
-    },
-    mount () {
-        this.catchNoteIfExists()
     }
 })
 
