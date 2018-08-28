@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/icon?
     family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
   </head>
@@ -15,7 +16,7 @@
     <script src="https://unpkg.com/marked"></script>
     <!-- Notebook app -->
     <div id="notebook" class="row">
-      <aside class="side-bar col s2 green lighten-5">
+      <aside class="side-bar col s2 green lighten-4">
         <div class="toolbar container">
           <button 
             class="btn"
@@ -34,7 +35,17 @@
         </div>
       </aside>
       <template v-if="selectedNote">
-        <section class="main col s10 grey lighten-3">
+        <section class="main col s10 grey lighten-5">
+          <div class="toolbar">
+            <!-- our toolbar -->
+            <input
+              v-model="selectedNote.title"
+              type="text"
+              placeholder="note title"/>
+              <button @click="deleteNote()">
+                delete
+              </button>
+          </div>
           <div class="row">
             <!-- Main pane -->
             <textarea class="col s6" v-model="selectedNote.content" cols="30" rows="10" placeholder="you can write in markdown"></textarea>  

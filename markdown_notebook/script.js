@@ -2,8 +2,8 @@ new Vue({
     el: '#notebook',
     data () {
         return {
-            notes: [],
-            selectedId: null
+            notes: JSON.parse(localStorage.getItem('notes')) || [],
+            selectedId: localStorage.getItem('selected-id') || null,
         }
     },
     // pre-computed properties or those that need logic behind them
@@ -26,6 +26,14 @@ new Vue({
     },
     // watch for changes
     watch: {
+        notes: {
+            handler: 'saveNotes',
+            // need this to track changes in objects inside the array
+            deep: true,
+        },
+        selectedId (val) {
+            localStorage.setItem('selected-id', val)
+        }
     },
     // general functions
     methods: {
@@ -47,6 +55,18 @@ new Vue({
         selectNote (note) {
             this.selectedId = note.id
         },
+        saveNotes () {
+            localStorage.setItem('notes', JSON.stringify(this.notes))
+            console.log('Notes saved!', new Date())
+        },
+        deleteNote () {
+            if (this.selectedNote && confirm('delete note?')) {
+                const index = this.notes.indexOf(this.selectedNote)
+                if (index !== -1) {
+                    this.notes.splice(index, 1)
+                }
+            }
+        }
     }
 })
 
