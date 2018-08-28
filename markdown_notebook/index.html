@@ -5,29 +5,43 @@
     <link href="https://fonts.googleapis.com/icon?
     family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
   </head>
   <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <!-- Include the library in the page -->
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/marked"></script>
     <!-- Notebook app -->
-    <div id="notebook">
-      <aside class="side-bar">
-        <div class="toolbar">
+    <div id="notebook" class="row">
+      <aside class="side-bar col s2 green lighten-5">
+        <div class="toolbar container">
           <button 
+            class="btn"
             @click="addNote">
             Add note
           </button>
           <div class="notes">
-            <div v-for="note in notes" :key="note.id">
+            <div
+              @click="selectNote(note)"
+              v-for="note in notes"
+              :class="{ selected: note === selectedNote }"
+              :key="note.id">
               {{ note.title }}
             </div>
           </div>
         </div>
       </aside>
-      <!-- Main pane -->
-      <textarea v-model="content" cols="30" rows="10"></textarea>  
-      <aside class="preview" v-html="notePreview"></aside>  
+      <template v-if="selectedNote">
+        <section class="main col s10 grey lighten-3">
+          <div class="row">
+            <!-- Main pane -->
+            <textarea class="col s6" v-model="selectedNote.content" cols="30" rows="10" placeholder="you can write in markdown"></textarea>  
+            <aside class="preview col s6" v-html="notePreview"></aside>  
+          </div>
+        </section>
+      </template>
     </div>
     <!-- Some JavaScript -->
     <script src="script.js"></script>

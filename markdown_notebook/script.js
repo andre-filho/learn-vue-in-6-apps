@@ -2,26 +2,33 @@ new Vue({
     el: '#notebook',
     data () {
         return {
-            content: localStorage.getItem('content') || 'you can write in **markdown**',
-            notes: []
+            notes: [],
+            selectedId: null
         }
     },
+    // pre-computed properties or those that need logic behind them
     computed: {
         notePreview () {
-            return marked(this.content)
-        }
+            return this.selectedNote ? marked(this.selectedNote.content) : ''
+        },
+        selectedNote () {
+            // return matching note with selectedId
+            return this.notes.find(note => note.id === this.selectedId) 
+            // if (this.selectedId != null) {
+            //     return this.notes.find(note => note.id === this.selectedId) 
+            // }
+            // else {
+            //     return {
+            //         content: ''
+            //     }   
+            // }
+        },
     },
+    // watch for changes
     watch: {
-        content: { 
-            handler: 'saveNote',
-        },
     },
+    // general functions
     methods: {
-        saveNote () {
-            console.log('saving note:', this.content)
-            localStorage.setItem('content', this.content)
-            this.reportOperation('saving')
-        },
         reportOperation (opName) {
             console.log('the', opName, 'opertation was completed')
         },
@@ -36,6 +43,9 @@ new Vue({
                 favorite: false,
             }
             this.notes.push(note)
+        },
+        selectNote (note) {
+            this.selectedId = note.id
         },
     }
 })
