@@ -26,10 +26,13 @@
           <div class="notes">
             <div
               @click="selectNote(note)"
-              v-for="note in notes"
+              v-for="note in sortedNotes"
               :class="{ selected: note === selectedNote }"
               :key="note.id">
-              {{ note.title }}
+              <p>
+                <i class="material-icons" v-if="note.favorite">star</i>
+                {{ note.title }}
+              </p>
             </div>
           </div>
         </div>
@@ -42,6 +45,11 @@
               v-model="selectedNote.title"
               type="text"
               placeholder="note title"/>
+              <button @click="favoriteNote" title="Favorite note">
+                <i class="material-icons">
+                  {{ selectedNote.favorite ? 'star' : 'star_border' }}
+                </i>
+              </button>
               <button @click="deleteNote()">
                 delete
               </button>

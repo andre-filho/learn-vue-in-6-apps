@@ -14,15 +14,15 @@ new Vue({
         selectedNote () {
             // return matching note with selectedId
             return this.notes.find(note => note.id === this.selectedId) 
-            // if (this.selectedId != null) {
-            //     return this.notes.find(note => note.id === this.selectedId) 
-            // }
-            // else {
-            //     return {
-            //         content: ''
-            //     }   
-            // }
         },
+        sortedNotes () {
+            return this.notes.slice()
+            .sort((a, b) => a.created - b.created)
+            .sort((a, b) => (a.favorite === b.favorite) ? 0
+                : a.favorite ? -1
+                : 1
+            )
+        }
     },
     // watch for changes
     watch: {
@@ -66,8 +66,12 @@ new Vue({
                     this.notes.splice(index, 1)
                 }
             }
+        },
+        favoriteNote () {
+            // this.selectedNote.favorite = !this.selectedNote.favorite
+            // ^ == XOR
+            // this.selectedNote.favorite = this.selectedNote.favorite ^ true
+            this.selectedNote.favorite ^= true
         }
     }
 })
-
-console.log('restored note:', localStorage.getItem('content'))
