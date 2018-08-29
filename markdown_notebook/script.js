@@ -22,6 +22,27 @@ new Vue({
                 : a.favorite ? -1
                 : 1
             )
+        },
+        linesCount () {
+            if (this.selectedNote) {
+                // number of new lines
+                return this.selectedNote.content.split(/\r\n|\r|\n/).length            }
+        },
+        wordsCount () {
+            var s = this.selectedNote.content
+            // turns \n in %20
+            s = s.replace(/\n/g, ' ')
+            // removes start and ending \n
+            s = s.replace(/(^\s*)|(\s*$)/gi, '')
+            // turn duplicated %20 into 1
+            s = s.replace(/\s\s+/gi, ' ')
+            // finally returns number of spaces
+            return s.split(' ').length
+        },
+        charactersCount () {
+            if (this.selectedNote) {
+                return this.selectedNote.content.split('').length
+            }
         }
     },
     // watch for changes
@@ -75,3 +96,6 @@ new Vue({
         }
     }
 })
+
+Vue.filter('date', time => moment(time)
+    .format('DD/MM/YY, HH:mm'))

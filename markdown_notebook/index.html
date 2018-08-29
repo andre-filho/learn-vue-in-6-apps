@@ -14,6 +14,7 @@
     <!-- Include the library in the page -->
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/marked"></script>
+    <script src="https://unpkg.com/moment"></script>
     <!-- Notebook app -->
     <div id="notebook" class="row">
       <aside class="side-bar col s2 green lighten-4">
@@ -58,6 +59,42 @@
             <!-- Main pane -->
             <textarea class="col s6" v-model="selectedNote.content" cols="30" rows="10" placeholder="you can write in markdown"></textarea>  
             <aside class="preview col s6" v-html="notePreview"></aside>  
+          </div>
+          <div class="toolbar status-bar">
+            <span class="date">
+              <span class="label">
+                Created 
+              </span>
+              <span class="value">
+                {{ selectedNote.created | date }}
+              </span>
+            </span>
+            <span class="lines">
+              <span class="label">
+                Lines
+              </span>
+              <span class="value">
+                {{ linesCount }}
+              </span>
+            </span>
+            <span class="words">
+              <span class="label">
+                Words
+              </span>
+              <span class="value">
+                {{ wordsCount }}
+              </span>
+            </span>
+            <span class="characters">
+              <span class="label">
+                Characters
+
+              </span>
+              <span class="value">
+                {{ charactersCount }}
+
+              </span>
+            </span>
           </div>
         </section>
       </template>
