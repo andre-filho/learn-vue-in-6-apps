@@ -10,4 +10,14 @@ var state = {
   // World
   worldRatio: getWorldRatio(),
   // TODO Other things
+  turn: 1,
+  players: [
+      {
+            name: 'Anne of the Great Cleaverage'
+      },
+      {
+            name: 'William of the Bald Planicies'
+      },
+  ],
+  currentPlayerIndex: Math.round(Math.random()),
 }
