@@ -7,6 +7,7 @@ new Vue({
         }
     },
     // pre-computed properties or those that need logic behind them
+    // just as a mothod, but has cache-based usage
     computed: {
         notePreview () {
             return this.selectedNote ? marked(this.selectedNote.content) : ''
@@ -45,10 +46,10 @@ new Vue({
             }
         }
     },
-    // watch for changes
+    // watch for changes, best used for when assinchronous changes are go go
     watch: {
         notes: {
-            handler: 'saveNotes',
+            handler: 'saveNotes', // tells that function x must run
             // need this to track changes in objects inside the array
             deep: true,
         },
