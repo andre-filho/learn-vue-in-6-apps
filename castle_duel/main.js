@@ -3,13 +3,29 @@ new Vue({
     el: '#app',
     template: `
         <div id="#app">
-            <top-bar/>
+            <top-bar
+                :turn="turn"
+                :players="players"
+                :current-player-index="currentPlayerIndex"/>
+            <card
+                :def="testCard"
+                @play="handlePlay"/>
         </div>
     `,
     data: state,
     mouted () {
         console.log(this.$data === state)
-    }
+    },
+    computed: {
+        testCard () {
+            return cards.archers
+        },
+    },
+    methods: {
+        handlePlay () {
+            console.log('you played a card')
+        },
+    },
 })
 
 window.addEventListener('resize', () => {

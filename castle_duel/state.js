@@ -13,7 +13,7 @@ var state = {
   turn: 1,
   players: [
       {
-            name: 'Anne of the Great Cleaverage'
+            name: 'Anne of the Curves of Sin'
       },
       {
             name: 'William of the Bald Planicies'
