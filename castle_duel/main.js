@@ -7,22 +7,34 @@ new Vue({
                 :turn="turn"
                 :players="players"
                 :current-player-index="currentPlayerIndex"/>
-            <hand
-                :cards="testHand"/>
+            <hand :cards="testHand"/>
         </div>
-    `,
+                `,
     data: state,
     mouted () {
         console.log(this.$data === state)
     },
-    computed: {
-        testCard () {
-            return cards.archers
-        },
+    created () {
+        this.testHand = this.createTestHand()
     },
+    computed: {},
     methods: {
-        handlePlay () {
-            console.log('you played a card')
+        createTestHand () {
+            const cards = []
+            const ids = Object.keys(cards)
+            for (let i = 0; i < 5; i++) {
+                cards.push(this.testDrawCard())
+            }
+            return cards
+        },
+        testDrawCard () {
+            const ids = Object.keys(cards)
+            const randomId = ids[Math.floor(Math.random() * ids.length)]
+            return {
+                uid: cardUid++,
+                id: randomId,
+                def: cards[randomId],
+            }
         },
     },
 })

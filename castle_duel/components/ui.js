@@ -72,33 +72,4 @@ Vue.component('hand', {
         </div>
     `,
     props: ['cards'],
-    methods: {
-        createTestHand () {
-            const cards = []
-            // Get the possible ids
-            const ids = Object.keys(cards)
-            // Draw 5 cards
-            for (let i = 0; i < 5; i++) {
-                cards.push(testDrawCard())
-            }
-            return cards
-        },
-        testDrawCard () {
-            // Choose a card at random with the ids
-            const ids = Object.keys(cards)
-            const randomId = ids[Math.floor(Math.random() * ids.length)]
-            // Return a new card with this definition
-            return {
-                // Unique id for the card
-                uid: cardUid++,
-                // Id of the definition
-                id: randomId,
-                // Definition object
-                def: cards[randomId],
-            }
-        },
-    },
-    created () {
-        this.testHand = this.createTestHand()
-    },
 })
