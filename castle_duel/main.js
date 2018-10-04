@@ -7,9 +7,8 @@ new Vue({
                 :turn="turn"
                 :players="players"
                 :current-player-index="currentPlayerIndex"/>
-            <card
-                :def="testCard"
-                @play="handlePlay"/>
+            <hand
+                :cards="testHand"/>
         </div>
     `,
     data: state,
