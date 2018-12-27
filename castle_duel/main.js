@@ -7,7 +7,10 @@ new Vue({
                 :turn="turn"
                 :players="players"
                 :current-player-index="currentPlayerIndex"/>
-            <hand :cards="testHand"/>
+            <transition name="fade">
+                <hand :cards="testHand"
+                    v-if="!activeOverlay"/>
+            </transition>
         </div>
                 `,
     data: state,
